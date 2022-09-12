@@ -1,0 +1,128 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $secondary-text;
+    background: white;
+
+    &__section {
+        &:nth-of-type(1) {
+            flex: 1;
+        }
+
+        &:nth-of-type(3) {
+            flex: 1;
+            .header__list {
+                width: fit-content;
+                margin-left: auto;
+            }
+        }
+    }
+
+    &__logo {
+        object-fit: cover;
+        height: 35px;
+        width: 114px;
+    }
+
+    &__list {
+        display: flex;
+        align-items: center;
+    }
+
+    &__li {
+        padding: 1.5em 1.5em;
+        max-height: 65px;
+
+        &--search {
+            display: flex;
+            align-items: center;
+            padding: 0.7em 0.7em; // As we highlight this when active, looks awkard if the whole height of header
+            border-radius: 5px;
+            background-color: white;
+            transition: width 100ms ease;
+
+            > .far {
+                margin-right: 0.5em;
+            }
+
+            > input {
+                outline: 0;
+                border: 0;
+                width: 100%;
+            }
+        }
+
+        &--notifications {
+            // Used by querySelector to position notifications modal
+            position: relative;
+            .header__unread {
+                height: 7px;
+                width: 7px;
+                border-radius: 50%;
+                background-color: $blue;
+                position: absolute;
+                top: 22px;
+                right: 22px;
+            }
+        }
+
+        &--active {
+            // Only for use with search
+            position: relative;
+            z-index: 4;
+            width: 300px;
+
+            > .far {
+                color: $blue;
+            }
+        }
+
+        &--profile {
+            display: flex;
+            align-items: center;
+            > .member {
+                margin-right: 1em !important;
+            }
+        }
+
+        &--border {
+            border-left: 1px rgba($border-color, 0.55) solid;
+        }
+    }
+
+    &--transparent {
+        // If board image is set
+        background-color: transparent;
+        color: white;
+
+        .header__li--search {
+            background-color: hsla(0, 0%, 100%, 0.3);
+            input {
+                background-color: transparent;
+                color: white;
+
+                &::placeholder {
+                    color: rgba(white, 0.7);
+                }
+            }
+
+            &:focus-within {
+                background-color: white;
+                color: $secondary-text;
+                :not(i) {
+                    color: black;
+                }
+            }
+        }
+
+        .header__li--border {
+            border: 0;
+        }
+    }
+}
